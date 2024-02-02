@@ -1,8 +1,19 @@
 local popup = require("plenary.popup")
 
-function ShowNotepad()
-    local height = 10
-    local width = 60
+local UI = {}
+UI.__index = UI
+
+function UI:new()
+    return setmetatable({
+        win_id = nil,
+        bufnr = nil
+    }, self)
+end
+
+function UI:create_notepad()
+    -- Setup default window
+    local height = 20
+    local width = 80
     local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
     local bufnr = vim.api.nvim_create_buf(false, false)
 
@@ -17,7 +28,34 @@ function ShowNotepad()
         borderchars = borderchars,
     })
 
-    if win_id = 0 then
-        Logger:log(
-            "ui#_create_window
+    if win_id == 0 then
+        self.bufnr = bufnr
+        self:close_notepad()
+        error("Notepad: Failed to create popup")
+    end
+
+    -- Set win_id
+    self.win_id = win_id
+
+    return win_id, bufnr
+end
+
+function UI:close_notepad()
+    if self.closing == true then
+        return
+    end
+
+    self.closing = true
+
+      if self.bufnr ~= nil and vim.api.nvim_buf_is_valid(self.bufnr) then
+        vim.api.nvim_buf_delete(self.bufnr, { force = true })
+    end
+
+    if self.win_id ~= nil and vim.api.nvim_win_is_valid(self.win_id) then
+        vim.api.nvim_win_close(self.win_id, true)
+    end
+
+    self.win_id = nil
+    self.bufnr = nil
+    self.closing = false
 end
