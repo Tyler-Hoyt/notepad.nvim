@@ -1,22 +1,29 @@
+local path = require("plenary.path")
 local popup = require("plenary.popup")
 
-local notes_path = vim.fn.stdpath("data") .. "/notes";
-local notepad_path = notes_path .. "/notepad.md"
+local dir_path = vim.fn.stdpath("data") .. "/notes"
+local notepad_path = dir_path .. "/notepad.md"
+
+function basename()
+    local base_name = vim.fs.basename(vim.fn.getcwd())
+    local parent_base_name = vim.fs.basename(vim.fs.dirname(vim.fn.getcwd()))
+    print(parent_base_name .. '_' .. base_name ..'.md')
+end
 
 -- Need to check if notepad exists for the current project
-local function get_info()
-    print("Getting info")
-    print(notes_path)
+function get_info()
     print(vim.api.nvim_buf_get_name(0))
 
-    if vim.fn.isdirectory(notes_path) == 0 then
+    if vim.fn.isdirectory(dir_path) == 0 then
         print("Notes directory does not exist")
+        path:new(dir_path):mkdir()
     else
         print("Notes directory exists")
     end
 
     if vim.fn.filereadable(notepad_path) == 0 then
         print("Notepad does not exist")
+        path:new(notepad_path):touch()
     else
         print("Notepad exists")
     end
