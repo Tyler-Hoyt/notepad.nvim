@@ -14,16 +14,11 @@ local function set_dir_path()
     local notepad_path = dir_path .. get_parent_dir() .. "_" ..  "notepad.md"
 
     if vim.fn.isdirectory(dir_path) == 0 then
-        print("Notes directory does not exist")
         path:new(dir_path):mkdir()
-    else
-        print("Notes directory exists")
     end
-if vim.fn.filereadable(notepad_path) == 0 then
-        print("Notepad does not exist")
+
+    if vim.fn.filereadable(notepad_path) == 0 then
         path:new(notepad_path):touch()
-    else
-        print("Notepad exists")
     end
 end
 
@@ -45,6 +40,7 @@ function M.open_notepad()
     local bufnr = vim.api.nvim_create_buf(false, true)
 
     vim.api.nvim_buf_set_name(bufnr, notepad_path)
+    vim.api.nvim_buf_set_option(bufnr, "bufhidden", "wipe")
     vim.api.nvim_buf_call(bufnr, vim.cmd.edit)
 
     local win_id = popup.create(bufnr, {
