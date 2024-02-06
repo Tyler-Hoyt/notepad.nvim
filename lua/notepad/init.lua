@@ -47,14 +47,16 @@ function M.setup(opts)
         opts.filetype = opts.filetype
     end
 
+    opts = opts
+
     -- Sets up our notes directory and notepad file for the current project
     set_dir_path(opts.filetype)
     vim.api.nvim_set_keymap("n", "<leader>nn", ":lua require('notepad').open_notepad()<CR>", { noremap = true, silent = true })
 end
 
-function M.open_notepad()
+function M:open_notepad()
     -- Need to check if buffer exists then open that buffer instead
-    local notepad_path = dir_path .. get_parent_dir()
+    local notepad_path = dir_path .. get_parent_dir(self.opts.filetype)
 
     -- Setup default window
     local height = 20
