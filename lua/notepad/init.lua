@@ -11,7 +11,7 @@ end
 
 -- Need to check if notepad exists for the current project
 local function set_dir_path()
-    local notepad_path = dir_path .. get_parent_dir() .. "/notepad.md"
+    local notepad_path = dir_path .. get_parent_dir() .. "_" ..  "notepad.md"
 
     if vim.fn.isdirectory(dir_path) == 0 then
         print("Notes directory does not exist")
