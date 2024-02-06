@@ -45,6 +45,7 @@ function M.create_notepad()
     local bufnr = vim.api.nvim_create_buf(false, false)
 
     vim.api.nvim_buf_set_name(bufnr, dir_path .. get_parent_dir() .. "_" .. "notepad.md")
+    vim.api.nvim_buf_call(bufnr, vim.cmd.edit)
 
     local win_id = popup.create(bufnr, {
         title = "Notepad",
