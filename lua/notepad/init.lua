@@ -53,8 +53,6 @@ function M.open_notepad()
         style = "minimal",
         borderchars = borderchars,
     })
-
-    popup.open(win_id)
 end
 
 return M
