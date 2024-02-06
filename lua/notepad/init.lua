@@ -44,11 +44,8 @@ function M.create_notepad()
     local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
     local bufnr = vim.api.nvim_create_buf(false, false)
 
-    print("hello")
-
     vim.api.nvim_buf_set_name(bufnr, dir_path .. get_parent_dir() .. "_" .. "/notepad.md")
 
-    print("oh no")
     local win_id = popup.create(bufnr, {
         title = "Notepad",
         highlight = "MyNotepadWindow",
