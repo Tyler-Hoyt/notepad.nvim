@@ -27,6 +27,7 @@ local M = {}
 function M.setup()
     -- Sets up our notes directory and notepad file for the current project
     set_dir_path()
+    vim.api.nvim_set_keymap("n", "<leader>nn", ":lua require('notepad').open_notepad()<CR>", { noremap = true, silent = true })
 end
 
 function M.open_notepad()
@@ -47,8 +48,7 @@ function M.open_notepad()
         title = "Notepad",
         highlight = "MyNotepadWindow",
         line = math.floor(((vim.o.lines - height) / 2) - 1),
-        col = math.floor((vim.o.columns - width) / 2),
-        minwidth = width,
+        col = math.floor((vim.o.columns - width) / 2), minwidth = width,
         minheight = height,
         style = "minimal",
         borderchars = borderchars,
