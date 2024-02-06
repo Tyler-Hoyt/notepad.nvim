@@ -27,7 +27,17 @@ if vim.fn.filereadable(notepad_path) == 0 then
     end
 end
 
-function create_notepad()
+
+
+local M = {}
+
+function M.setup()
+    -- Sets up our notes directory and notepad file for the current project
+    set_dir_path()
+end
+
+
+function M.create_notepad()
     -- Setup default window
     local height = 20
     local width = 80
@@ -49,14 +59,6 @@ function create_notepad()
         style = "minimal",
         borderchars = borderchars,
     })
-end
-
-
-local M = {}
-
-function M.setup()
-    -- Sets up our notes directory and notepad file for the current project
-    set_dir_path()
 end
 
 return M
