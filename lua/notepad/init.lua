@@ -41,7 +41,6 @@ function M.open_notepad()
 
     vim.api.nvim_buf_set_name(bufnr, notepad_path)
     vim.api.nvim_buf_call(bufnr, vim.cmd.edit)
-    vim.api.nvim_buf_set_option(bufnr, "bufhidden", "wipe")
 
     local win_id = popup.create(bufnr, {
         title = "Notepad",
