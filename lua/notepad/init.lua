@@ -27,8 +27,6 @@ if vim.fn.filereadable(notepad_path) == 0 then
     end
 end
 
-
-
 local M = {}
 
 function M.setup()
@@ -36,28 +34,20 @@ function M.setup()
     set_dir_path()
 end
 
-
-function M.create_notepad()
+function M.open_notepad()
     -- Need to check if buffer exists then open that buffer instead
     local notepad_path = dir_path .. get_parent_dir() .. "_" ..  "notepad.md"
-    local bufnr = nil
-
-    if vim.bufname(notepad_path) == nil then
-        bufnr = vim.api.nvim_create_buf(false, false)
-        vim.api.nvim_buf_set_name(bufnr, dir_path .. get_parent_dir() .. "_" .. "notepad.md")
-        vim.api.nvim_buf_call(bufnr, vim.cmd.edit)
-    else
-        bufnr = vim.bufname(notepad_path)
-    end
-
-
 
     -- Setup default window
     local height = 20
     local width = 80
     local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+    local bufnr = vim.api.nvim_create_buf(false, true)
 
-    local win_id = popup.create(bufnr, {
+    vim.api.nvim_buf_set_name(bufnr, notepad_path)
+    vim.api.nvim_buf_call(bufnr, vim.cmd.edit)
+
+    local win_id = popup.create(nil, {
         title = "Notepad",
         highlight = "MyNotepadWindow",
         line = math.floor(((vim.o.lines - height) / 2) - 1),
@@ -67,6 +57,8 @@ function M.create_notepad()
         style = "minimal",
         borderchars = borderchars,
     })
+
+    popup.open(win_id)
 end
 
 return M
