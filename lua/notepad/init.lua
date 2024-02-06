@@ -3,7 +3,6 @@ local popup = require("plenary.popup")
 
 local dir_path = vim.fn.stdpath("data") .. "/notes"
 
-
 -- Get the parent directory of the current working directory
 local function get_parent_dir()
     local base_dir = vim.fs.basename(vim.fn.getcwd())
