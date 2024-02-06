@@ -23,13 +23,23 @@ local function set_dir_path(filetype)
     end
 end
 
+local function has_value(tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+    return false
+end
+
 local M = {}
 
 function M.setup(opts)
+    local filetypes = {".md", ".txt", ".norg"}
     opts = opts or {}
 
     -- Set filetype to .md if not specified
-    if opts.filetype ~= ".md" or opts.filetype ~= ".txt" or opts.filetype ~= ".norg" then
+    if has_value(filetypes, opts.filetype) == false then
         error("Notepad: Filetype must be .md or .txt or .norg. Defaulting to .md.")
         opts.filetype = ".md"
         return
