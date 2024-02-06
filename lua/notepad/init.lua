@@ -35,7 +35,7 @@ local function create_notepad()
     local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
     local bufnr = vim.api.nvim_create_buf(false, false)
 
-    vim.api.nvim_buf_set_name(bufnr, get_parent_dir() .."/notepad.md")
+    vim.api.nvim_buf_set_name(bufnr, dir_path .. get_parent_dir() .. "_" .. "/notepad.md")
 
     local win_id = popup.create(bufnr, {
         title = "Notepad",
@@ -55,7 +55,7 @@ local M = {}
 function M.setup()
     -- Sets up our notes directory and notepad file for the current project
     set_dir_path()
-    vim.api.nvim_buf_set_keymap(0, "n", "<leader>nn", ":lua require('notepad.nvim').create_notepad()<CR>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(0, "n", "<leader>nn", ":lua require('notepad').create_notepad()<CR>", { noremap = true, silent = true })
 end
 
 return M
