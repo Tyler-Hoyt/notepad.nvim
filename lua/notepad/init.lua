@@ -37,10 +37,11 @@ function M.open_notepad()
     local height = 20
     local width = 80
     local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-    local bufnr = vim.api.nvim_create_buf(false, true)
+    local bufnr = vim.api.nvim_create_buf(false, false)
 
     vim.api.nvim_buf_set_name(bufnr, notepad_path)
     vim.api.nvim_buf_call(bufnr, vim.cmd.edit)
+    vim.api.nvim_buf_set_option(bufnr, "bufhidden", "wipe")
 
     local win_id = popup.create(bufnr, {
         title = "Notepad",
