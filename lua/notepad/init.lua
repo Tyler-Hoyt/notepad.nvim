@@ -55,7 +55,7 @@ local M = {}
 function M.setup()
     -- Sets up our notes directory and notepad file for the current project
     set_dir_path()
-    create_notepad()
+    vim.api.nvim_buf_set_keymap(0, "n", "<leader>nn", ":lua require('notepad').create_notepad()<CR>", { noremap = true, silent = true })
 end
 
 return M
