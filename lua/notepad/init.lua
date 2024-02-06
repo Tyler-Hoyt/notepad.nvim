@@ -3,15 +3,17 @@ local popup = require("plenary.popup")
 
 local dir_path = vim.fn.stdpath("data") .. "/notes"
 
+
 -- Get the parent directory of the current working directory
 local function get_parent_dir()
-    local parent_dir = "/" .. vim.fs.basename(vim.fs.dirname(vim.fn.getcwd()))
-    return parent_dir
+    local base_dir = vim.fs.basename(vim.fn.getcwd())
+    local parent_base_dir = vim.fs.basename(vim.fs.dirname(vim.fn.getcwd()))
+    return base_dir .. "_" .. parent_base_dir .. ".md"
 end
 
 -- Need to check if notepad exists for the current project
 local function set_dir_path()
-    local notepad_path = dir_path .. get_parent_dir() .. "_" ..  "notepad.md"
+    local notepad_path = dir_path .. get_parent_dir()
 
     if vim.fn.isdirectory(dir_path) == 0 then
         path:new(dir_path):mkdir()
@@ -32,7 +34,7 @@ end
 
 function M.open_notepad()
     -- Need to check if buffer exists then open that buffer instead
-    local notepad_path = dir_path .. get_parent_dir() .. "_" ..  "notepad.md"
+    local notepad_path = dir_path .. get_parent_dir()
 
     -- Setup default window
     local height = 20
