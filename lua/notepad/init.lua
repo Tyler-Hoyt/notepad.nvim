@@ -5,7 +5,7 @@ local dir_path = vim.fn.stdpath("data") .. "/notes"
 
 -- Get the parent directory of the current working directory
 local function get_parent_dir()
-    local parent_dir = vim.fs.basename(vim.fs.dirname(vim.fn.getcwd()))
+    local parent_dir = "/" .. vim.fs.basename(vim.fs.dirname(vim.fn.getcwd()))
     return parent_dir
 end
 
@@ -53,7 +53,7 @@ end
 local M = {}
 
 function M.setup()
-    -- Sets up our ntoes directory and notepad file for the current project
+    -- Sets up our notes directory and notepad file for the current project
     set_dir_path()
     create_notepad()
 end
