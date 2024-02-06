@@ -8,7 +8,7 @@ local dir_path = vim.fn.stdpath("data") .. "/notes"
 local function get_parent_dir()
     local base_dir = vim.fs.basename(vim.fn.getcwd())
     local parent_base_dir = vim.fs.basename(vim.fs.dirname(vim.fn.getcwd()))
-    return base_dir .. "_" .. parent_base_dir .. ".md"
+    return "/" .. base_dir .. "_" .. parent_base_dir .. ".md"
 end
 
 -- Need to check if notepad exists for the current project
