@@ -19,8 +19,7 @@ local function set_dir_path()
     else
         print("Notes directory exists")
     end
-
-    if vim.fn.filereadable(notepad_path) == 0 then
+if vim.fn.filereadable(notepad_path) == 0 then
         print("Notepad does not exist")
         path:new(notepad_path):touch()
     else
@@ -28,7 +27,7 @@ local function set_dir_path()
     end
 end
 
-local function create_notepad()
+function create_notepad()
     -- Setup default window
     local height = 20
     local width = 80
