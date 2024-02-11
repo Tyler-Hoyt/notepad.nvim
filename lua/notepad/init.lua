@@ -56,7 +56,7 @@ end
 
 function M:open_notepad()
     -- Need to check if buffer exists then open that buffer instead
-    local notepad_path = dir_path .. get_parent_dir(self.opts.filetype)
+    local notepad_path = dir_path .. get_parent_dir(M.opts.filetype)
 
     -- Setup default window
     local height = 20
