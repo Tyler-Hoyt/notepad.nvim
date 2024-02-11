@@ -47,7 +47,7 @@ function M.setup(opts)
         opts.filetype = opts.filetype
     end
 
-    opts = opts
+    Filetype = opts.filetype
 
     -- Sets up our notes directory and notepad file for the current project
     set_dir_path(opts.filetype)
@@ -56,7 +56,7 @@ end
 
 function M:open_notepad()
     -- Need to check if buffer exists then open that buffer instead
-    local notepad_path = dir_path .. get_parent_dir(M.opts.filetype)
+    local notepad_path = dir_path .. get_parent_dir(self.Filetype)
 
     -- Setup default window
     local height = 20
