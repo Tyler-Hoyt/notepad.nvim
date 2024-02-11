@@ -3,6 +3,9 @@ local popup = require("plenary.popup")
 
 local dir_path = vim.fn.stdpath("data") .. "/notes"
 
+-- Gets set in setup function
+local filetype = '';
+
 -- Get the parent directory of the current working directory
 local function get_parent_dir(filetype)
     local base_dir = vim.fs.basename(vim.fn.getcwd())
@@ -34,7 +37,7 @@ end
 
 local M = {}
 
-function M:setup(opts)
+function M.setup(opts)
     local filetypes = {".md", ".txt", ".norg"}
     opts = opts or {}
 
@@ -47,7 +50,7 @@ function M:setup(opts)
         opts.filetype = opts.filetype
     end
 
-    self.filetype = opts.filetype
+    filetype = opts.filetype
 
     -- Sets up our notes directory and notepad file for the current project
     set_dir_path(opts.filetype)
@@ -56,7 +59,7 @@ end
 
 function M:open_notepad()
     -- Need to check if buffer exists then open that buffer instead
-    local notepad_path = dir_path .. get_parent_dir(self.filetype)
+    local notepad_path = dir_path .. get_parent_dir(filetype)
 
     -- Setup default window
     local height = 20
